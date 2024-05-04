@@ -37,31 +37,98 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.putAppointmentController = exports.postAppointmentController = exports.getAppointmentByIdController = exports.getAllAppointmentsController = void 0;
+var appointmentsService_1 = require("../services/appointmentsService");
 var getAllAppointmentsController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var appointments, error_1;
     return __generator(this, function (_a) {
-        res.status(200).send("This is get all appointments");
-        return [2];
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4, (0, appointmentsService_1.getAppointmentsService)()];
+            case 1:
+                appointments = _a.sent();
+                res.status(200).json(appointments);
+                return [3, 3];
+            case 2:
+                error_1 = _a.sent();
+                res.status(500).json({ message: "error en el servidor" });
+                return [3, 3];
+            case 3: return [2];
+        }
     });
 }); };
 exports.getAllAppointmentsController = getAllAppointmentsController;
 var getAppointmentByIdController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var appointmentId, appointment, error_2;
     return __generator(this, function (_a) {
-        res.status(200).send("This is get appointment by id");
-        return [2];
+        switch (_a.label) {
+            case 0:
+                appointmentId = parseInt(req.params.id);
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4, (0, appointmentsService_1.getAppointmentByIdService)(appointmentId)];
+            case 2:
+                appointment = _a.sent();
+                if (appointment) {
+                    res.status(200).json(appointment);
+                }
+                else {
+                    res.status(404).json({ message: "Cita no encontrada" });
+                }
+                return [3, 4];
+            case 3:
+                error_2 = _a.sent();
+                res.status(500).json({ message: "error en el servidor" });
+                return [3, 4];
+            case 4: return [2];
+        }
     });
 }); };
 exports.getAppointmentByIdController = getAppointmentByIdController;
 var postAppointmentController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var appointment, newAppointment, error_3;
     return __generator(this, function (_a) {
-        res.status(200).send("This is a post appointment");
-        return [2];
+        switch (_a.label) {
+            case 0:
+                appointment = req.body;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4, (0, appointmentsService_1.createAppointmentService)(appointment.userId, appointment)];
+            case 2:
+                newAppointment = _a.sent();
+                res.status(201).json(newAppointment);
+                return [3, 4];
+            case 3:
+                error_3 = _a.sent();
+                res.status(500).json({ message: "error en el servidor" });
+                return [3, 4];
+            case 4: return [2];
+        }
     });
 }); };
 exports.postAppointmentController = postAppointmentController;
 var putAppointmentController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var appointmentId, error_4;
     return __generator(this, function (_a) {
-        res.status(200).send("This is cancel appointment");
-        return [2];
+        switch (_a.label) {
+            case 0:
+                appointmentId = parseInt(req.params.id);
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4, (0, appointmentsService_1.cancelAppointmentService)(appointmentId)];
+            case 2:
+                _a.sent();
+                res.status(200).json({ message: "Cita cancelada" });
+                return [3, 4];
+            case 3:
+                error_4 = _a.sent();
+                res.status(500).json({ message: "error en el servidor" });
+                return [3, 4];
+            case 4: return [2];
+        }
     });
 }); };
 exports.putAppointmentController = putAppointmentController;
