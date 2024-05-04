@@ -4,7 +4,7 @@ import {
     getAppointmentByIdController,
     postAppointmentController,
     putAppointmentController,
-} from "../../controllers/appointment"
+} from "../controllers/AppointmentsControllers"
 const routerAppointment: Router = Router();
 
 routerAppointment.get("/", getAllAppointmentsController);
