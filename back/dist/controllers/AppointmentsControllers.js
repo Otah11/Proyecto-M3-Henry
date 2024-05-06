@@ -95,7 +95,7 @@ var postAppointmentController = function (req, res) { return __awaiter(void 0, v
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                return [4, (0, appointmentsService_1.createAppointmentService)(appointment.userId, appointment)];
+                return [4, (0, appointmentsService_1.createAppointmentService)(appointment)];
             case 2:
                 newAppointment = _a.sent();
                 res.status(201).json(newAppointment);

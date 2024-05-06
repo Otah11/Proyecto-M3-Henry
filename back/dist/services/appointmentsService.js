@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -48,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cancelAppointmentService = exports.createAppointmentService = exports.getAppointmentByIdService = exports.getAppointmentsService = void 0;
+var IAppointments_1 = require("../interfaces/IAppointments");
 var appointments = [];
 var id = 1;
 var getAppointmentsService = function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -62,22 +52,29 @@ var getAppointmentByIdService = function (id) { return __awaiter(void 0, void 0,
     });
 }); };
 exports.getAppointmentByIdService = getAppointmentByIdService;
-var createAppointmentService = function (userId, appointment) { return __awaiter(void 0, void 0, void 0, function () {
-    var newAppointment;
-    return __generator(this, function (_a) {
-        newAppointment = __assign(__assign({}, appointment), { id: id, userId: userId });
-        appointments.push(newAppointment);
-        id++;
-        return [2, newAppointment];
-    });
-}); };
+var createAppointmentService = function (appointment) {
+    var newAppointment = {
+        id: id,
+        date: appointment.date,
+        time: appointment.time,
+        userId: appointment.userId,
+        status: appointment.status
+    };
+    if (!newAppointment.userId) {
+        throw new Error("Appointment must have a userId");
+    }
+    else {
+        id++,
+            appointments.push(newAppointment);
+    }
+};
 exports.createAppointmentService = createAppointmentService;
 var cancelAppointmentService = function (appointmentId) { return __awaiter(void 0, void 0, void 0, function () {
     var index;
     return __generator(this, function (_a) {
         index = appointments.findIndex(function (appointment) { return appointment.id === appointmentId; });
         if (index !== -1) {
-            appointments[index].status = "cancelled";
+            appointments[index].status = IAppointments_1.Status.CANCELLED;
         }
         return [2];
     });

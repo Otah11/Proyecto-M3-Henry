@@ -37,31 +37,88 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postUserLoginController = exports.postUserRegisterController = exports.getUserByIdController = exports.getAllUsersControllers = void 0;
+var usersService_1 = require("../services/usersService");
+var credentialsService_1 = require("../services/credentialsService");
 var getAllUsersControllers = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var users;
     return __generator(this, function (_a) {
-        res.send("get all users");
-        return [2];
+        switch (_a.label) {
+            case 0: return [4, (0, usersService_1.getUsersService)()];
+            case 1:
+                users = _a.sent();
+                res.status(200).json(users);
+                return [2];
+        }
     });
 }); };
 exports.getAllUsersControllers = getAllUsersControllers;
 var getUserByIdController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var userId, user, error_1;
     return __generator(this, function (_a) {
-        res.send("get user by ID");
-        return [2];
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                userId = parseInt(req.params.id);
+                return [4, (0, usersService_1.getUserByIdService)(userId)];
+            case 1:
+                user = _a.sent();
+                if (user) {
+                    res.status(200).json(user);
+                }
+                else {
+                    res.status(404).json({ message: "User not found" });
+                }
+                return [3, 3];
+            case 2:
+                error_1 = _a.sent();
+                res.status(500).json({ message: "Internal server error" });
+                return [3, 3];
+            case 3: return [2];
+        }
     });
 }); };
 exports.getUserByIdController = getUserByIdController;
 var postUserRegisterController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        res.send("this post user");
-        return [2];
+    var _a, name_1, email, birthDate, dni, username, password, user, credentialArray, newUser, error_2;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 2, , 3]);
+                _a = req.body, name_1 = _a.name, email = _a.email, birthDate = _a.birthDate, dni = _a.dni, username = _a.username, password = _a.password;
+                user = { name: name_1, email: email, birthDate: birthDate, dni: dni, idCredentials: 0 };
+                credentialArray = { username: username, password: password };
+                return [4, (0, usersService_1.createUserService)(user, credentialArray)];
+            case 1:
+                newUser = _b.sent();
+                res.status(201).json(newUser);
+                return [3, 3];
+            case 2:
+                error_2 = _b.sent();
+                res.status(400).json(error_2);
+                return [3, 3];
+            case 3: return [2];
+        }
     });
 }); };
 exports.postUserRegisterController = postUserRegisterController;
 var postUserLoginController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        res.send("put user");
-        return [2];
+    var _a, username, password, error_3;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 2, , 3]);
+                _a = req.body, username = _a.username, password = _a.password;
+                return [4, (0, credentialsService_1.checkCredentialsService)(username, password)];
+            case 1:
+                _b.sent();
+                res.status(200).send("usuario logeado");
+                return [3, 3];
+            case 2:
+                error_3 = _b.sent();
+                res.status(400).json({ error: error_3.message });
+                return [3, 3];
+            case 3: return [2];
+        }
     });
 }); };
 exports.postUserLoginController = postUserLoginController;

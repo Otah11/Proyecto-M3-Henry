@@ -5,7 +5,7 @@ import {
     createAppointmentService,
     cancelAppointmentService,
 } from "../services/appointmentsService";
-import  IAppointment from "../interfaces/IAppointments";
+import  { IAppointment } from "../interfaces/IAppointments"; 
 
 export const getAllAppointmentsController = async (req: Request, res: Response):Promise <void> => {
     try {
@@ -31,7 +31,7 @@ export const getAppointmentByIdController = async (req: Request, res: Response):
 export const postAppointmentController = async (req: Request, res: Response):Promise <void> => {
     const appointment: IAppointment = req.body;
     try {
-        const newAppointment = await createAppointmentService(appointment.userId, appointment);
+        const newAppointment = await createAppointmentService( appointment);
         res.status(201).json(newAppointment);
     } catch (error) {
         res.status(500).json({ message: "error en el servidor"});
@@ -46,9 +46,3 @@ export const putAppointmentController = async (req: Request, res: Response):Prom
         res.status(500).json({ message: "error en el servidor"});
     }
 }
-
-
-//res.status(200).send("This is get all appointments")
-//res.status(200).send("This is get appointment by id")
-//res.status(200).send("This is a post appointment")
-//res.status(200).send("This is cancel appointment")
