@@ -53,39 +53,37 @@ var getAllUsersControllers = function (req, res) { return __awaiter(void 0, void
 }); };
 exports.getAllUsersControllers = getAllUsersControllers;
 var getUserByIdController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var userId, user, error_1;
+    var id, user, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                userId = parseInt(req.params.id);
-                return [4, (0, usersService_1.getUserByIdService)(userId)];
+                id = req.params.id;
+                _a.label = 1;
             case 1:
-                user = _a.sent();
-                if (user) {
-                    res.status(200).json(user);
-                }
-                else {
-                    res.status(404).json({ message: "User not found" });
-                }
-                return [3, 3];
+                _a.trys.push([1, 3, , 4]);
+                return [4, (0, usersService_1.getUserByIdService)(parseInt(id))];
             case 2:
+                user = _a.sent();
+                res.status(200).json(user);
+                return [3, 4];
+            case 3:
                 error_1 = _a.sent();
-                res.status(500).json({ message: "Internal server error" });
-                return [3, 3];
-            case 3: return [2];
+                return [3, 4];
+            case 4:
+                ;
+                return [2];
         }
     });
 }); };
 exports.getUserByIdController = getUserByIdController;
 var postUserRegisterController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, email, birthDate, dni, username, password, user, credentialArray, newUser, error_2;
+    var _a, name, email, birthDate, dni, username, password, user, credentialArray, newUser, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
-                _a = req.body, name_1 = _a.name, email = _a.email, birthDate = _a.birthDate, dni = _a.dni, username = _a.username, password = _a.password;
-                user = { name: name_1, email: email, birthDate: birthDate, dni: dni, idCredentials: 0 };
+                _a = req.body, name = _a.name, email = _a.email, birthDate = _a.birthDate, dni = _a.dni, username = _a.username, password = _a.password;
+                user = { name: name, email: email, birthDate: birthDate, dni: dni, };
                 credentialArray = { username: username, password: password };
                 return [4, (0, usersService_1.createUserService)(user, credentialArray)];
             case 1:
@@ -94,7 +92,7 @@ var postUserRegisterController = function (req, res) { return __awaiter(void 0, 
                 return [3, 3];
             case 2:
                 error_2 = _b.sent();
-                res.status(400).json(error_2);
+                res.status(400).send(error_2);
                 return [3, 3];
             case 3: return [2];
         }
@@ -102,7 +100,7 @@ var postUserRegisterController = function (req, res) { return __awaiter(void 0, 
 }); };
 exports.postUserRegisterController = postUserRegisterController;
 var postUserLoginController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, username, password, error_3;
+    var _a, username, password, user, error_3;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -110,8 +108,8 @@ var postUserLoginController = function (req, res) { return __awaiter(void 0, voi
                 _a = req.body, username = _a.username, password = _a.password;
                 return [4, (0, credentialsService_1.checkCredentialsService)(username, password)];
             case 1:
-                _b.sent();
-                res.status(200).send("usuario logeado");
+                user = _b.sent();
+                res.status(200).json(user);
                 return [3, 3];
             case 2:
                 error_3 = _b.sent();

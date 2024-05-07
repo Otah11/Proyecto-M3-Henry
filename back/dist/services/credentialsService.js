@@ -36,36 +36,38 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkCredentialsService = exports.getCredential = exports.createCredentialsService = void 0;
+exports.checkCredentialsService = exports.createCredentialsService = void 0;
+var data_source_1 = require("../config/data-source");
 var id = 1;
 var credentials = [];
 var createCredentialsService = function (username, password) { return __awaiter(void 0, void 0, void 0, function () {
     var newCredentials;
     return __generator(this, function (_a) {
-        newCredentials = {
-            id: id,
-            username: username,
-            password: password
-        };
-        credentials.push(newCredentials);
-        id++;
-        return [2, newCredentials.id];
+        switch (_a.label) {
+            case 0:
+                newCredentials = data_source_1.CredentialsModel.create({ username: username, password: password });
+                return [4, data_source_1.CredentialsModel.save(newCredentials)];
+            case 1:
+                _a.sent();
+                return [2, newCredentials.id];
+        }
     });
 }); };
 exports.createCredentialsService = createCredentialsService;
-var getCredential = function () { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        return [2, credentials];
-    });
-}); };
-exports.getCredential = getCredential;
 var checkCredentialsService = function (username, password) { return __awaiter(void 0, void 0, void 0, function () {
-    var foundCredentials;
+    var foundCredentials, user;
     return __generator(this, function (_a) {
-        foundCredentials = credentials.find(function (credentials) { return credentials.username === username && credentials.password === password; });
-        if (!foundCredentials)
-            return [2, null];
-        return [2, foundCredentials.id];
+        switch (_a.label) {
+            case 0: return [4, data_source_1.CredentialsModel.findOne({ where: { username: username, password: password } })];
+            case 1:
+                foundCredentials = _a.sent();
+                if (!!foundCredentials) return [3, 2];
+                throw new Error("Credentials not found");
+            case 2: return [4, data_source_1.UserModel.findOne({ where: { id: foundCredentials.id } })];
+            case 3:
+                user = _a.sent();
+                return [2, user];
+        }
     });
 }); };
 exports.checkCredentialsService = checkCredentialsService;

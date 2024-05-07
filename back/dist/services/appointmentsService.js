@@ -37,46 +37,78 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cancelAppointmentService = exports.createAppointmentService = exports.getAppointmentByIdService = exports.getAppointmentsService = void 0;
-var IAppointments_1 = require("../interfaces/IAppointments");
+var data_source_1 = require("../config/data-source");
 var appointments = [];
 var id = 1;
 var getAppointmentsService = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var allAppointments;
     return __generator(this, function (_a) {
-        return [2, appointments];
+        switch (_a.label) {
+            case 0: return [4, data_source_1.AppointmentModel.find()];
+            case 1:
+                allAppointments = _a.sent();
+                return [2, allAppointments];
+        }
     });
 }); };
 exports.getAppointmentsService = getAppointmentsService;
-var getAppointmentByIdService = function (id) { return __awaiter(void 0, void 0, void 0, function () {
+var getAppointmentByIdService = function (appointmentId) { return __awaiter(void 0, void 0, void 0, function () {
+    var foundAppointment;
     return __generator(this, function (_a) {
-        return [2, appointments.find(function (appointment) { return appointment.id === id; })];
+        switch (_a.label) {
+            case 0: return [4, data_source_1.AppointmentModel.findOne({
+                    where: { id: appointmentId }
+                })];
+            case 1:
+                foundAppointment = _a.sent();
+                if (!foundAppointment) {
+                    throw new Error("Appointment not found");
+                }
+                return [2, foundAppointment];
+        }
     });
 }); };
 exports.getAppointmentByIdService = getAppointmentByIdService;
-var createAppointmentService = function (appointment) {
-    var newAppointment = {
-        id: id,
-        date: appointment.date,
-        time: appointment.time,
-        userId: appointment.userId,
-        status: appointment.status
-    };
-    if (!newAppointment.userId) {
-        throw new Error("Appointment must have a userId");
-    }
-    else {
-        id++,
-            appointments.push(newAppointment);
-    }
-};
-exports.createAppointmentService = createAppointmentService;
-var cancelAppointmentService = function (appointmentId) { return __awaiter(void 0, void 0, void 0, function () {
-    var index;
+var createAppointmentService = function (appointment, userId) { return __awaiter(void 0, void 0, void 0, function () {
+    var time, date, user, newAppointment;
     return __generator(this, function (_a) {
-        index = appointments.findIndex(function (appointment) { return appointment.id === appointmentId; });
-        if (index !== -1) {
-            appointments[index].status = IAppointments_1.Status.CANCELLED;
+        switch (_a.label) {
+            case 0:
+                time = appointment.time, date = appointment.date;
+                return [4, data_source_1.UserModel.findOne({ where: { id: userId } })];
+            case 1:
+                user = _a.sent();
+                if (!!user) return [3, 2];
+                throw new Error("User not found");
+            case 2:
+                newAppointment = data_source_1.AppointmentModel.create({
+                    date: date,
+                    time: time,
+                    user: user
+                });
+                return [4, data_source_1.AppointmentModel.save(newAppointment)];
+            case 3:
+                _a.sent();
+                return [2, newAppointment];
         }
-        return [2];
+    });
+}); };
+exports.createAppointmentService = createAppointmentService;
+var cancelAppointmentService = function (id) { return __awaiter(void 0, void 0, void 0, function () {
+    var appointment;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4, (0, exports.getAppointmentByIdService)(id)];
+            case 1:
+                appointment = _a.sent();
+                if (!appointment) return [3, 3];
+                appointment.status = "cancelled";
+                return [4, data_source_1.AppointmentModel.save(appointment)];
+            case 2:
+                _a.sent();
+                return [2, appointment];
+            case 3: return [2];
+        }
     });
 }); };
 exports.cancelAppointmentService = cancelAppointmentService;

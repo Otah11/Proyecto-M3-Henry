@@ -3,39 +3,39 @@ import ICredentials from "../interfaces/ICredentials"; //??
 import IUser from "../interfaces/IUser";
 import { createCredentialsService } from "./credentialsService";
 import  credentialsDto  from '../dtos/credentialdDto';
-
+import { User } from "../entities/User";
+import { UserModel } from "../config/data-source";
 
 let users: IUser[] = [];
 
 let id:number=1;
 
-
-export const getUsersService = async () => {
-    return users;
+export const getUsersService = async ():Promise<User[]> => {
+    const allUser:User[] = await UserModel.find({relations: ["appointments"]});
+    return allUser;
 };
 
-export const getUserByIdService = async (id: number) :Promise <IUser | undefined> => {
-    return users.find((user) => user.id === id);
+export const getUserByIdService = async (id: number) :Promise <User | undefined> => {
+    const userFound = await UserModel.findOne({where: { id: id }, relations: ["appointments"]});
+    if(userFound) return userFound;
 }
 
-export const createUserService= async (user:userDto, credentials:credentialsDto) :Promise< IUser> => {
-    const {username,password}= credentials;
-    const idCredentials = await createCredentialsService(username,password);
-    const {name,email,birthDate,dni}=user;
-    const newUser: IUser = {
-        id,
-        name,
-        email,
-        birthDate,
-        dni,
-        idCredentials
-    }
+export const createUserService= async (user:userDto, credentials:credentialsDto) :Promise<User> => {
+    const {name,email,birthDate,dni}= user;
+    const {password,username}= credentials;
+    
+    const credentialID = await createCredentialsService(username,password);
+    
+        const userCreated =  UserModel.create({
+            name,
+            email,
+            birthDate,
+            dni,
+            credentials:{id:credentialID}}
+        )
+        UserModel.save(userCreated);
+        return userCreated;
+        
+}
 
-    users.push(newUser);
-    id++;
-
-    return newUser;
-};
-
-export const deleteUserService = async () => {};
 

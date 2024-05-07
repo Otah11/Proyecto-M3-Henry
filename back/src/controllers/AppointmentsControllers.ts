@@ -1,48 +1,31 @@
 import { Request, Response } from "express";
-import {
-    getAppointmentsService,
-    getAppointmentByIdService,
-    createAppointmentService,
-    cancelAppointmentService,
-} from "../services/appointmentsService";
-import  { IAppointment } from "../interfaces/IAppointments"; 
+import {getAppointmentsService,getAppointmentByIdService,createAppointmentService,cancelAppointmentService,} from "../services/appointmentsService";
+import   IAppointment  from "../interfaces/IAppointments"; 
+import { Appointment } from '../entities/Appointment';
 
 export const getAllAppointmentsController = async (req: Request, res: Response):Promise <void> => {
-    try {
-        const appointments = await getAppointmentsService();
-        res.status(200).json(appointments);
-    } catch (error) {
-        res.status(500).json({ message: "error en el servidor"});
-    }
+    const appointments = await getAppointmentsService()
+    res.status(200).json(appointments);
 }
 export const getAppointmentByIdController = async (req: Request, res: Response):Promise <void> => {
-    const appointmentId: number = parseInt(req.params.id);
-    try {
-        const appointment = await getAppointmentByIdService(appointmentId);
-        if (appointment) {
-            res.status(200).json(appointment);
-        } else {
-            res.status(404).json({ message: "Cita no encontrada" });
-        }
-    } catch (error) {
-        res.status(500).json({ message: "error en el servidor"});
-    }
+    const appointmentById = getAppointmentByIdService(parseInt(req.params.id));
+    res.status(200).json(appointmentById);
 }
 export const postAppointmentController = async (req: Request, res: Response):Promise <void> => {
-    const appointment: IAppointment = req.body;
     try {
-        const newAppointment = await createAppointmentService( appointment);
+        const {date, time, status, userId} = req.body;
+        const newAppointment = await createAppointmentService({date, time, status}, parseInt(userId));
         res.status(201).json(newAppointment);
-    } catch (error) {
-        res.status(500).json({ message: "error en el servidor"});
+    } catch (error:any) {
+        res.status(400).json({error:error.message});
     }
 }
 export const putAppointmentController = async (req: Request, res: Response):Promise <void> => {
-    const appointmentId: number = parseInt(req.params.id);
     try {
-        await cancelAppointmentService(appointmentId);
-        res.status(200).json({ message: "Cita cancelada" });
-    } catch (error) {
-        res.status(500).json({ message: "error en el servidor"});
+        const appointmentId = req.params.id;
+        const appointment = await cancelAppointmentService(parseInt(appointmentId));
+        res.status(200).json(appointment);
+    } catch (error:any) {
+        res.status(400).json({error:error.message});
     }
 }

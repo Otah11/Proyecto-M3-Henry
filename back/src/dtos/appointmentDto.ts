@@ -1,10 +1,7 @@
-import { Status } from "../interfaces/IAppointments"
 
 interface AppointmentDto {
     date: Date,
-    time: Date,
-    userId: number,
-    status: Status
+    time: String,
+    status: "active" | "cancelled",
 }
-
-export default AppointmentDto
+export default AppointmentDto;

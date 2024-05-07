@@ -6,5 +6,5 @@ var routerAppointment = (0, express_1.Router)();
 routerAppointment.get("/", AppointmentsControllers_1.getAllAppointmentsController);
 routerAppointment.get("/:id", AppointmentsControllers_1.getAppointmentByIdController);
 routerAppointment.post("/schedule", AppointmentsControllers_1.postAppointmentController);
-routerAppointment.put("/cancel", AppointmentsControllers_1.putAppointmentController);
+routerAppointment.put("/cancel/:id", AppointmentsControllers_1.putAppointmentController);
 exports.default = routerAppointment;

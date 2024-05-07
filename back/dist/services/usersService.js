@@ -36,48 +36,57 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUserService = exports.createUserService = exports.getUserByIdService = exports.getUsersService = void 0;
+exports.createUserService = exports.getUserByIdService = exports.getUsersService = void 0;
 var credentialsService_1 = require("./credentialsService");
+var data_source_1 = require("../config/data-source");
 var users = [];
 var id = 1;
 var getUsersService = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var allUser;
     return __generator(this, function (_a) {
-        return [2, users];
+        switch (_a.label) {
+            case 0: return [4, data_source_1.UserModel.find({ relations: ["appointments"] })];
+            case 1:
+                allUser = _a.sent();
+                return [2, allUser];
+        }
     });
 }); };
 exports.getUsersService = getUsersService;
 var getUserByIdService = function (id) { return __awaiter(void 0, void 0, void 0, function () {
+    var userFound;
     return __generator(this, function (_a) {
-        return [2, users.find(function (user) { return user.id === id; })];
+        switch (_a.label) {
+            case 0: return [4, data_source_1.UserModel.findOne({ where: { id: id }, relations: ["appointments"] })];
+            case 1:
+                userFound = _a.sent();
+                if (userFound)
+                    return [2, userFound];
+                return [2];
+        }
     });
 }); };
 exports.getUserByIdService = getUserByIdService;
 var createUserService = function (user, credentials) { return __awaiter(void 0, void 0, void 0, function () {
-    var username, password, idCredentials, name, email, birthDate, dni, newUser;
+    var name, email, birthDate, dni, password, username, credentialID, userCreated;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                username = credentials.username, password = credentials.password;
+                name = user.name, email = user.email, birthDate = user.birthDate, dni = user.dni;
+                password = credentials.password, username = credentials.username;
                 return [4, (0, credentialsService_1.createCredentialsService)(username, password)];
             case 1:
-                idCredentials = _a.sent();
-                name = user.name, email = user.email, birthDate = user.birthDate, dni = user.dni;
-                newUser = {
-                    id: id,
+                credentialID = _a.sent();
+                userCreated = data_source_1.UserModel.create({
                     name: name,
                     email: email,
                     birthDate: birthDate,
                     dni: dni,
-                    idCredentials: idCredentials
-                };
-                users.push(newUser);
-                id++;
-                return [2, newUser];
+                    credentials: { id: credentialID }
+                });
+                data_source_1.UserModel.save(userCreated);
+                return [2, userCreated];
         }
     });
 }); };
 exports.createUserService = createUserService;
-var deleteUserService = function () { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-    return [2];
-}); }); };
-exports.deleteUserService = deleteUserService;
