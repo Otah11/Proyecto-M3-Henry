@@ -1,7 +1,7 @@
 import AppointmentDto from "../dtos/appointmentDto";
 import  IAppointment from "../interfaces/IAppointments"; //IAppointment  from "../interfaces/IAppointments";
 import { AppointmentModel, UserModel } from "../config/data-source";
-import { Appointment } from "../entities/Appointment";
+import TipoTurno, { Appointment } from "../entities/Appointment";
 
 
 let appointments: IAppointment[] = [];
@@ -16,15 +16,18 @@ export const getAppointmentByIdService = async (appointmentId: number) : Promise
     const foundAppointment = await AppointmentModel.findOne({
         where: { id: appointmentId }
         });
-
+        
         if (!foundAppointment) {
             throw new Error("Appointment not found");
         }
+        
         return foundAppointment;
 };
 
 export const createAppointmentService = async (appointment : AppointmentDto, userId: number): Promise<Appointment> =>{
-    const {time, date} = appointment;
+    const {time, date, type} = appointment;
+    if (!(type in TipoTurno)){
+        throw new Error("Invalid appointment type")};
     const user = await UserModel.findOne({where: {id: userId}});
     
     if(!user){
@@ -33,6 +36,7 @@ export const createAppointmentService = async (appointment : AppointmentDto, use
         const newAppointment = AppointmentModel.create({
             date: date,
             time: time,
+            type: type,
             user: user
         });
         await AppointmentModel.save(newAppointment);

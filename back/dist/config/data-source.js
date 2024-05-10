@@ -5,13 +5,14 @@ var typeorm_1 = require("typeorm");
 var User_1 = require("../entities/User");
 var Credential_1 = require("../entities/Credential");
 var Appointment_1 = require("../entities/Appointment");
+var envs_1 = require("./envs");
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "postgres",
-    password: "juan1234",
-    database: "m3turnos",
+    host: envs_1.DB_HOST,
+    port: envs_1.DB_PORT,
+    username: envs_1.DB_USERNAME,
+    password: envs_1.DB_PASSWORD,
+    database: envs_1.DB_NAME,
     synchronize: true,
     logging: ["error"],
     entities: [User_1.User, Credential_1.Credentials, Appointment_1.Appointment],

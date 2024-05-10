@@ -1,7 +1,9 @@
+import TipoTurno from "../entities/Appointment";
 
 interface AppointmentDto {
     date: Date,
     time: String,
-    status: "active" | "cancelled",
+    type: TipoTurno,
+    //status: "active" | "cancelled",
 }
 export default AppointmentDto;

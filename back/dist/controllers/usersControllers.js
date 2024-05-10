@@ -92,7 +92,7 @@ var postUserRegisterController = function (req, res) { return __awaiter(void 0, 
                 return [3, 3];
             case 2:
                 error_2 = _b.sent();
-                res.status(400).send(error_2);
+                res.status(400).json({ error: error_2.message });
                 return [3, 3];
             case 3: return [2];
         }

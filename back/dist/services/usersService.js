@@ -68,14 +68,29 @@ var getUserByIdService = function (id) { return __awaiter(void 0, void 0, void 0
 }); };
 exports.getUserByIdService = getUserByIdService;
 var createUserService = function (user, credentials) { return __awaiter(void 0, void 0, void 0, function () {
-    var name, email, birthDate, dni, password, username, credentialID, userCreated;
+    var name, email, birthDate, dni, password, username, dniInUse, emailInUse, usernameInUse, credentialID, userCreated;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 name = user.name, email = user.email, birthDate = user.birthDate, dni = user.dni;
                 password = credentials.password, username = credentials.username;
-                return [4, (0, credentialsService_1.createCredentialsService)(username, password)];
+                return [4, data_source_1.UserModel.findOne({ where: { dni: dni } })];
             case 1:
+                dniInUse = _a.sent();
+                if (dniInUse)
+                    throw new Error('DNI en uso');
+                return [4, data_source_1.UserModel.findOne({ where: { email: email } })];
+            case 2:
+                emailInUse = _a.sent();
+                if (emailInUse)
+                    throw new Error('Email en uso');
+                return [4, data_source_1.CredentialsModel.findOne({ where: { username: username } })];
+            case 3:
+                usernameInUse = _a.sent();
+                if (usernameInUse)
+                    throw new Error('Usuario en uso');
+                return [4, (0, credentialsService_1.createCredentialsService)(username, password)];
+            case 4:
                 credentialID = _a.sent();
                 userCreated = data_source_1.UserModel.create({
                     name: name,

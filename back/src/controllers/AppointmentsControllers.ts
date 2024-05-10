@@ -8,13 +8,13 @@ export const getAllAppointmentsController = async (req: Request, res: Response):
     res.status(200).json(appointments);
 }
 export const getAppointmentByIdController = async (req: Request, res: Response):Promise <void> => {
-    const appointmentById = getAppointmentByIdService(parseInt(req.params.id));
+    const appointmentById = await getAppointmentByIdService(parseInt(req.params.id));
     res.status(200).json(appointmentById);
 }
 export const postAppointmentController = async (req: Request, res: Response):Promise <void> => {
     try {
-        const {date, time, status, userId} = req.body;
-        const newAppointment = await createAppointmentService({date, time, status}, parseInt(userId));
+        const {date, time, type,  userId} = req.body;
+        const newAppointment = await createAppointmentService({date, time, type}, parseInt(userId));
         res.status(201).json(newAppointment);
     } catch (error:any) {
         res.status(400).json({error:error.message});

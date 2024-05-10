@@ -35,9 +35,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cancelAppointmentService = exports.createAppointmentService = exports.getAppointmentByIdService = exports.getAppointmentsService = void 0;
 var data_source_1 = require("../config/data-source");
+var Appointment_1 = __importDefault(require("../entities/Appointment"));
 var appointments = [];
 var id = 1;
 var getAppointmentsService = function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -70,11 +74,15 @@ var getAppointmentByIdService = function (appointmentId) { return __awaiter(void
 }); };
 exports.getAppointmentByIdService = getAppointmentByIdService;
 var createAppointmentService = function (appointment, userId) { return __awaiter(void 0, void 0, void 0, function () {
-    var time, date, user, newAppointment;
+    var time, date, type, user, newAppointment;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                time = appointment.time, date = appointment.date;
+                time = appointment.time, date = appointment.date, type = appointment.type;
+                if (!(type in Appointment_1.default)) {
+                    throw new Error("Invalid appointment type");
+                }
+                ;
                 return [4, data_source_1.UserModel.findOne({ where: { id: userId } })];
             case 1:
                 user = _a.sent();
@@ -84,6 +92,7 @@ var createAppointmentService = function (appointment, userId) { return __awaiter
                 newAppointment = data_source_1.AppointmentModel.create({
                     date: date,
                     time: time,
+                    type: type,
                     user: user
                 });
                 return [4, data_source_1.AppointmentModel.save(newAppointment)];

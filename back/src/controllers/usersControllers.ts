@@ -27,8 +27,8 @@ export const postUserRegisterController = async (req: Request, res: Response) =>
         const credentialArray = { username, password };
         const newUser :User = await createUserService(user, credentialArray);
         res.status(201).json(newUser);
-    } catch (error) {
-        res.status(400).send(error);
+    } catch (error:any) {
+        res.status(400).json({error: error.message});
     }
 }
 

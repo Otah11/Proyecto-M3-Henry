@@ -1,0 +1,48 @@
+:root{
+  --primary-color: #ffae00;
+  --secondary-color: #333333;}
+
+.navbar {
+  position: fixed; /* Posición fija para que se mantenga visible */
+  top: 0px;
+  width: 100vw; /* Ancho del contenedor */
+    display: flex;
+    justify-content: center;
+    background-color: #ffae00; 
+    padding: 0.5em 0 0.3em 0;
+    font-size: 1.5em;
+    font-weight: bold;  
+    height: 61px;
+    align-items: flex-end;
+    box-shadow: 0 0 30px  rgba(115, 255, 0, 0.5);
+  }
+  
+  .navbar span {
+    margin: 40px 3em 0 3em;
+    color: #333333; /* Cambia el color del texto si es necesario para que sea legible en el fondo */
+  }
+  .navbar button {
+    color: #ffae00; /* Cambia el color del texto a negro */
+    background-color: #333333; /* Cambia el color de fondo a blanco */
+    border: 1px solid #333333; /* Elimina el borde del botón */
+    font-size: 1em; /* Ajusta el tamaño de la fuente según sea necesario */
+    
+  }
+
+  .buttons {
+    position: absolute; /* Posición relativa al contenedor */
+    right: 50px; /* Posición a la derecha del contenedor */
+    top: 10px; /* Posición arriba del contenedor */
+  }
+  .navbar button:hover {
+    background-color: #ffae00; /* Cambia el color de fondo al amarillo cuando se pasa el cursor */
+    color: #333333; /* Cambia el color del texto a negro cuando se pasa el cursor */
+    border: 1px solid #333333
+  }
+  .image {
+    top: 0px; /* Posición arriba del contenedor */
+    width: 95px; /* Ancho relativo al contenedor */
+    height: auto; /* Altura automática para mantener la proporción */
+    position: absolute; /* Posición relativa al contenedor */
+    left: 30px; /* Posición a la derecha del contenedor */
+  }

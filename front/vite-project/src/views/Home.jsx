@@ -1,10 +1,8 @@
-import NavBar from "../components/NavBar"
+import NavBar from "../components/primary/navbar/NavBar"
 
 const Home = () => {
     return(
         <>
-        
-        <h1>Este es el componente Home</h1>
         <NavBar />
         </>
     )

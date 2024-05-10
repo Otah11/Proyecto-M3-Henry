@@ -1,6 +1,21 @@
 import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
 
+enum TipoTurno{ 
+    Yoga = "Yoga",
+    Streching = "Streching",
+    Pilates = "Pilates",
+    Crossfit = "Crossfit",
+    Hit = "Hit",
+    Zumba = "Zumba",
+    Spinning = "Spinning",
+    Kickboxing = "Kickboxing",
+    Taebo = "Taebo",
+    Taekwondo = "Taekwondo",
+    Taichi = "Taichi",
+    Calistenia = "Calistenia",
+
+}
 @Entity({name: "appointments"})
 export class Appointment {
     @PrimaryGeneratedColumn()
@@ -11,6 +26,8 @@ export class Appointment {
     @Column()
     time: String
     
+    @Column({type: "enum", enum: TipoTurno})
+    type: TipoTurno
 
     @Column({default: "active"})
     status: "active" | "cancelled"
@@ -19,3 +36,4 @@ export class Appointment {
     user: User
 
 }
+export default TipoTurno

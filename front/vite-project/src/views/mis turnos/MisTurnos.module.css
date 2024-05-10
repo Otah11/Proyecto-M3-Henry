@@ -1,0 +1,20 @@
+:-webkit-scrollbar {
+    display: none; /* Oculta las barras de scroll en WebKit */
+  }
+.cardcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-end;
+    height: 70vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  scrollbar-color: #333333 #f9f9f9;
+  
+    margin-right: 40px;
+    border-top-left-radius : 10px;
+    border-bottom-left-radius: 10px;
+    position: absolute;
+    right: 20px;
+}
+

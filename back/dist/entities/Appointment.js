@@ -12,6 +12,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Appointment = void 0;
 var typeorm_1 = require("typeorm");
 var User_1 = require("./User");
+var TipoTurno;
+(function (TipoTurno) {
+    TipoTurno["yoga"] = "yoga";
+    TipoTurno["streching"] = "streching";
+    TipoTurno["pilates"] = "pilates";
+    TipoTurno["crossfit"] = "crossfit";
+    TipoTurno["hit"] = "hit";
+    TipoTurno["zumba"] = "zumba";
+    TipoTurno["spinning"] = "spinning";
+    TipoTurno["kickboxing"] = "kickboxing";
+    TipoTurno["taebo"] = "taebo";
+    TipoTurno["taekwondo"] = "taekwondo";
+    TipoTurno["taichi"] = "taichi";
+    TipoTurno["calistenia"] = "calistenia";
+})(TipoTurno || (TipoTurno = {}));
 var Appointment = (function () {
     function Appointment() {
     }
@@ -28,6 +43,10 @@ var Appointment = (function () {
         __metadata("design:type", String)
     ], Appointment.prototype, "time", void 0);
     __decorate([
+        (0, typeorm_1.Column)({ type: "enum", enum: TipoTurno }),
+        __metadata("design:type", String)
+    ], Appointment.prototype, "type", void 0);
+    __decorate([
         (0, typeorm_1.Column)({ default: "active" }),
         __metadata("design:type", String)
     ], Appointment.prototype, "status", void 0);
@@ -41,3 +60,4 @@ var Appointment = (function () {
     return Appointment;
 }());
 exports.Appointment = Appointment;
+exports.default = TipoTurno;

@@ -1,0 +1,28 @@
+:root{
+    --primary-color: #ffae00;
+    --secondary-color: #333333;}
+
+.card {
+    background-color: #ffae00;
+    color: #333333;
+    width: 170px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(115, 255, 0, 0.5);
+    margin : 5px;
+}
+.card img{
+    width: 25%;
+    /* padding-bottom: 0;
+    margin-bottom: 0; */
+}
+.card p{
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+}
+.card h2{
+    margin-top: 0  ;
+    margin-bottom: 0;
+}
