@@ -1,11 +1,14 @@
 
-import Home from './views/Home'
-import MisTurnos from './views/mis turnos/MisTurnos'
+import NavBar from './components/primary/navbar/NavBar'
+import Login from './views/login/Login'
+// import MisTurnos from './views/mis turnos/MisTurnos'
+import Register from './views/register/Register'
 function App() {
   return <div>
-  <Home />
-
-  <MisTurnos />
+  <NavBar />
+  <Register />
+  <Login />  
+  {/* <MisTurnos /> */}
   
   </div>
 }

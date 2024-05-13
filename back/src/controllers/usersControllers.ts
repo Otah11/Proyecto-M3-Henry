@@ -42,7 +42,3 @@ export const postUserLoginController = async (req: Request, res: Response) => {
     }
 }
 
-//res.send("get all users")
-//res.send("get user by ID")
-//res.send("this post user")
-//res.send("put user")

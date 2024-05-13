@@ -8,7 +8,8 @@ const MisTurnos = () => {
     const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
-       axios.get ("http://localhost:3000/appointments/").then(res => setAppointments(res.data))
+       axios.get ("http://localhost:3000/appointments/")
+       .then(res => setAppointments(res.data))
     },[])
 
     return(

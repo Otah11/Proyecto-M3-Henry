@@ -1,6 +1,4 @@
-:-webkit-scrollbar {
-    display: none; /* Oculta las barras de scroll en WebKit */
-  }
+  
 .cardcontainer{
     display: flex;
     flex-direction: column;
@@ -8,8 +6,6 @@
     align-items: flex-end;
     height: 70vh;
     overflow-y: auto;
-    scrollbar-width: thin;
-  scrollbar-color: #333333 #f9f9f9;
   
     margin-right: 40px;
     border-top-left-radius : 10px;
@@ -18,3 +14,11 @@
     right: 20px;
 }
 
+.cardcontainer::-webkit-scrollbar{
+    width: 7px;
+}
+
+.cardcontainer::-webkit-scrollbar-thumb{
+    background: #ffae00;
+    border-radius: 10px;
+}

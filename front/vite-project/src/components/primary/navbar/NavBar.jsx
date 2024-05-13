@@ -13,7 +13,7 @@ const NavBar = () => {
                 <span>Contact</span>
             </div>
             <div className={styles.buttons}>
-                <button >Log In</button>
+                <button >Login</button>
                 <button >Sign Up</button>
             </div>
       </div>
