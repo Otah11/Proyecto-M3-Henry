@@ -1,24 +1,55 @@
-
-
+import { useState } from 'react'
+//import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { validateAppointment } from '../../../helpers/validateAppointment';
 const AppointmentForm = () => {
 
-       
-        
+  const userId = useSelector(state => state.userLogged.userData.user.id);
+
+  const [formData, setFormData] = useState({
+    date: '', 
+    time: '', 
+    type: '', 
+    userId: userId
+  });
+  const[error, setError] = useState({date: "", time: "", type: ""});
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+    setError(validateAppointment(formData));
+  }
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    console.log(formData)
+   axios.post ("http://localhost:3000/appointments/schedule", formData)
+   .then (() => alert("Turno solicitado"))
+   .catch (() => alert("Error al solicitar el turno"))
+
+ 
+}
 
     return (
-        <form >
+        <form onSubmit={handleSubmit}>
           <h2>Solicitar Turno</h2>
           <div>
             <label>Fecha</label>
-            <input type="date" name="Fecha"  />
+            <input onChange = {handleChange} value={formData.date} type="date" name="date"  />
+            {error.date && <p>{error.date}</p>}
 
 
            
           </div>
           <div>
             <label>Horario</label>
-            <select name="Horario">
+            <select value={formData.time} onChange={handleChange} name="time">
+              <option selected>Horario</option>
               <option value="07:00">07:00</option>
               <option value="08:00">08:00</option>
               <option value="09:00">09:00</option>
@@ -35,10 +66,12 @@ const AppointmentForm = () => {
               <option value="20:00">20:00</option>
               <option value="21:00">21:00</option>
               </select>
+              {error.time && <p>{error.time}</p>}
           </div>
           <div>
             <label>Actividad</label>
-            <select name="Actividad">
+            <select value={formData.type} onChange={handleChange} name="type">
+              <option selected >Clase</option>
               <option value="Calistenia">Calistenia</option>
               <option value="Crossfit">Crossfit</option>
               <option value="Hiit">Hit</option>
@@ -51,9 +84,10 @@ const AppointmentForm = () => {
               <option value="Taichi">Taichi</option>
               <option value="Zumba">Zumba</option>
               <option value="Yoga">Yoga</option>
-
             </select>
+            {error.type && <p>{error.type}</p>}
           </div>
+          <button type="submit">Crear Cita</button>
         </form>
       );
 

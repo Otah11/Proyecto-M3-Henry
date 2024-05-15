@@ -2,6 +2,9 @@ import { useState } from 'react';
 import  styles from "./Register.module.css";
 import axios from 'axios';
 import {validateRegister} from '../../helpers/validateRegister.js'
+import { useNavigate } from 'react-router-dom';
+
+
 const Register = () => {
   
   const [formData, setFormData] = useState({
@@ -40,6 +43,8 @@ const Register = () => {
   password: '', 
   confirmPassword: '' 
 });
+
+const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
       const mensajeError = validateRegister(formData);
@@ -57,6 +62,7 @@ const Register = () => {
                 password: '', 
                 confirmPassword: ''
             })
+            navigate("/login");
         })
         .catch((error) => {
           alert("Error al crear el usuario: " + error.response.data.message)

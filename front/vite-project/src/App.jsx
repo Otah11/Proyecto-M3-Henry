@@ -1,13 +1,11 @@
 
-import {Routes, Route, useLocation} from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import {Routes, Route, } from 'react-router-dom'
 
 import NavBar from './components/primary/navbar/NavBar'
 import Login from './views/login/Login'
 import Register from './views/register/Register'
 import MisTurnos from './views/mis turnos/MisTurnos'
 import Gymhome from './views/gymhome/Gymhome'
-
 import AppointmentForm from './components/primary/AppointmentForm/AppointmentForm'
 function App() {
   

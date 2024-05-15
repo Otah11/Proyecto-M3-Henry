@@ -18,6 +18,8 @@ const NavBar = () => {
                 <span>About</span>
                 <span>Contact</span>
                 {user ? <Link to = "/turnos"><span>Turnos</span></Link> : null}
+                {user ? <Link to = "/cita"><span>Clases</span></Link> : null}
+
             </div>
                 {!user ?               
             <div className={styles.buttons}>

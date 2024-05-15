@@ -29,6 +29,7 @@ const MisTurnos = () => {
         <div className={styles.container}>
             <h1>Este es el componente MisTurnos</h1>
             <div className={styles.cardcontainer}>
+                
                 {appointments.map(appointment => {
                     const fecha = appointment.date.split('T')[0]
                  return <Appointments key={appointment.id} id={appointment.id} date={fecha} time={appointment.time} type={appointment.type} status={appointment.status} onCancel={handleCancel} />
@@ -40,6 +41,3 @@ const MisTurnos = () => {
 
 export default MisTurnos
 
-// className={styles.container}
-
-// className={styles.cardcontainer}
