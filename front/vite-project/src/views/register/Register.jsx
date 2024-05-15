@@ -21,8 +21,14 @@ const Register = () => {
       ...formData,
       [name]: value      
     });
-    const errors=validateRegister(formData);
-    setErrors(errors);
+
+    
+    const errors2=validateRegister({
+      ...formData,
+      [name]: value      
+    });
+    const avisosMolestos= {...errors,[name]:errors2[name]}
+    setErrors(avisosMolestos);
   };
   
   const [errors, setErrors] = useState({
@@ -36,9 +42,10 @@ const Register = () => {
 });
   const handleSubmit = (e) => {
     e.preventDefault();
+      const mensajeError = validateRegister(formData);
 
-
-        if (Object.keys(errors).length > 0) {
+        if (Object.keys(mensajeError).length === 0) {
+          formData.dni=Number(formData.dni)
         axios.post("http://localhost:3000/users/register", formData)
         .then(() => {alert("Usuario registrado exitosamente");
             setFormData({
@@ -51,8 +58,14 @@ const Register = () => {
                 confirmPassword: ''
             })
         })
-        .catch(() => alert("Error al registrar el usuario"))
-    } 
+        .catch((error) => {
+          alert("Error al crear el usuario: " + error.response.data.message)
+          console.log(error)
+        });
+        
+      } else {
+        setErrors(mensajeError)
+        alert("Formulario incompleto")}
   };
 
   
@@ -93,9 +106,11 @@ const Register = () => {
         <input className={styles.input} type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder='********'/>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
       </label>
-      <button className={styles.button} >Registrar</button>
+      <button className={styles.button}  >Registrar</button>
     </form>
   );
 };
 
 export default Register;
+
+//disabled={formData.name === '' || formData.email === '' || formData.birthDate === '' || formData.dni === '' || formData.username === '' ||  formData.password === '' ||formData.confirmPassword === '' || Object.keys(errors).length !== 0}

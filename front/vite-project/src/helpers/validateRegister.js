@@ -29,7 +29,7 @@ export const validateRegister = (input) => {
     if (input.password === input.confirmPassword) {
       console.log(input);
     } else {
-      errors.password = "Las contraseñas no coinciden";
+      errors.confirmPassword = "Las contraseñas no coinciden";
     }
     return errors;
     

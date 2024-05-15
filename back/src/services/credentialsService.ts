@@ -14,7 +14,7 @@ export const createCredentialsService = async (username: string, password: strin
 
 
 
-export const checkCredentialsService = async (username: string, password: string) : Promise<User | null> =>{
+export const checkCredentialsService = async (username: string, password: string) : Promise<{login:boolean,user:User|null}> =>{
    const foundCredentials = await CredentialsModel.findOne({where: {username, password}});
 
    if(!foundCredentials){
@@ -22,7 +22,7 @@ export const checkCredentialsService = async (username: string, password: string
    }else{
         const user = await UserModel.findOne({where: {id: foundCredentials.id}});
     
-        return user;
+        return {login: true, user};
    }
        
    }

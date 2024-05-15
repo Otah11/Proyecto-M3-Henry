@@ -7,3 +7,5 @@ body  {
   background: url("src/components/secondary/img/fondo.png");
   background-size: cover ;
 }
+a{
+  text-decoration: none;}

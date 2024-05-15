@@ -14,18 +14,18 @@ var typeorm_1 = require("typeorm");
 var User_1 = require("./User");
 var TipoTurno;
 (function (TipoTurno) {
-    TipoTurno["yoga"] = "yoga";
-    TipoTurno["streching"] = "streching";
-    TipoTurno["pilates"] = "pilates";
-    TipoTurno["crossfit"] = "crossfit";
-    TipoTurno["hit"] = "hit";
-    TipoTurno["zumba"] = "zumba";
-    TipoTurno["spinning"] = "spinning";
-    TipoTurno["kickboxing"] = "kickboxing";
-    TipoTurno["taebo"] = "taebo";
-    TipoTurno["taekwondo"] = "taekwondo";
-    TipoTurno["taichi"] = "taichi";
-    TipoTurno["calistenia"] = "calistenia";
+    TipoTurno["Yoga"] = "Yoga";
+    TipoTurno["Streching"] = "Streching";
+    TipoTurno["Pilates"] = "Pilates";
+    TipoTurno["Crossfit"] = "Crossfit";
+    TipoTurno["Hit"] = "Hit";
+    TipoTurno["Zumba"] = "Zumba";
+    TipoTurno["Spinning"] = "Spinning";
+    TipoTurno["Kickboxing"] = "Kickboxing";
+    TipoTurno["Taebo"] = "Taebo";
+    TipoTurno["Taekwondo"] = "Taekwondo";
+    TipoTurno["Taichi"] = "Taichi";
+    TipoTurno["Calistenia"] = "Calistenia";
 })(TipoTurno || (TipoTurno = {}));
 var Appointment = (function () {
     function Appointment() {

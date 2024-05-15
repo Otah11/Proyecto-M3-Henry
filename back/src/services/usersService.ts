@@ -24,11 +24,11 @@ export const createUserService= async (user:userDto, credentials:credentialsDto)
     const {name,email,birthDate,dni}= user;
     const {password,username}= credentials;
     
-    const dniInUse = await UserModel.findOne({where: { dni: dni }});
-    if(dniInUse) throw new Error('DNI en uso');
-    
     const emailInUse = await UserModel.findOne({where: { email: email }});
     if(emailInUse) throw new Error('Email en uso');
+
+    const dniInUse = await UserModel.findOne({where: { dni: dni }});
+    if(dniInUse) throw new Error('DNI en uso');
 
     const usernameInUse = await CredentialsModel.findOne({where: {username: username}});
     if(usernameInUse) throw new Error('Usuario en uso');

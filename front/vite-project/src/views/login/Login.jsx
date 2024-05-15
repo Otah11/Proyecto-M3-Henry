@@ -2,9 +2,15 @@ import { useState } from "react";
 import styles from './Login.module.css'
 import { validateLogin } from "../../helpers/validateLogin";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../redux/reducer";
 
 const Login = () => {
-    const [loginData, setLoginData] = useState({
+  const dispatch = useDispatch();  
+  
+  
+  const [loginData, setLoginData] = useState({
         username: '',
         password: ''
     });
@@ -12,6 +18,8 @@ const Login = () => {
         username: "",
         password: ""
     })
+
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -22,19 +30,23 @@ const Login = () => {
         });
         const errors=validateLogin(loginData);
         setErrors(errors);
-        // setErrors(validateLogin(loginData));
+       
         
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
        
-        if (Object.keys(errors).length > 0) {
-            axios.post("http://localhost:3000/users/login", loginData)
-            .then(() => {alert("Iniciaste sesión exitosamente");
-               
-            })
-            .catch(() => alert("Error al iniciar sesión"))
-        } else{console.log(loginData)}
+        if (Object.keys(errors).length === 0) {
+          try {
+            const response = await axios.post("http://localhost:3000/users/login", loginData)
+               alert("Login exitoso")
+               dispatch(setUserData(response.data))
+               navigate("/");
+            }
+           catch (error) {
+            alert("Usuario o contraseña incorrectos")
+          }
+        } else{alert("Formulario incompleto")}
     }
 
     return (
@@ -43,14 +55,14 @@ const Login = () => {
           <div>
             <label>Username</label>
             <input type="text" name="username" value={loginData.username} placeholder="username" onChange={handleInputChange} />
-            {errors.username &&<p style={{color: 'red'}}>{errors.username}</p>}
+            {errors.username &&<p >{errors.username}</p>}
           </div>
           <div>
             <label>Password</label>
             <input type="password" name="password" value={loginData.password} placeholder="********" onChange={handleInputChange} />
-            {errors.password &&<p style={{color: 'red'}}>{errors.password}</p>}
+            {errors.password &&<p >{errors.password}</p>}
           </div>
-          <button>Login</button>
+          <button disabled={loginData.username === '' ||  loginData.password === '' || Object.keys(errors).length !== 0} >Login</button>
         </form>
       );
 

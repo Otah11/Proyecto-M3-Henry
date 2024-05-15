@@ -19,6 +19,7 @@
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 100%;
   }
   
   .button {
@@ -35,4 +36,8 @@
     color: #333333; 
     border: 1px solid #333333
   }
-  
+  .button[disabled] {
+    background-color: #ccc; 
+    color: #333333; 
+    border: 1px solid #ccc
+  }

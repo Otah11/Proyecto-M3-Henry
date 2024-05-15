@@ -1,5 +1,5 @@
 export const validateLogin = (input) => {
-    let errors = {    };
+    let errors = {};
     
     if (input.username === ""){
         errors.name="Ingrese su Usuario";

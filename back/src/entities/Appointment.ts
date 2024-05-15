@@ -6,7 +6,7 @@ enum TipoTurno{
     Streching = "Streching",
     Pilates = "Pilates",
     Crossfit = "Crossfit",
-    Hit = "Hit",
+    Hiit = "Hiit",
     Zumba = "Zumba",
     Spinning = "Spinning",
     Kickboxing = "Kickboxing",
