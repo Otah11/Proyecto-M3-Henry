@@ -1,5 +1,4 @@
 import { useState } from 'react'
-//import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { validateAppointment } from '../../../helpers/validateAppointment';

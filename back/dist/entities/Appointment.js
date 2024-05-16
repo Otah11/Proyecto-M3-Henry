@@ -18,7 +18,7 @@ var TipoTurno;
     TipoTurno["Streching"] = "Streching";
     TipoTurno["Pilates"] = "Pilates";
     TipoTurno["Crossfit"] = "Crossfit";
-    TipoTurno["Hit"] = "Hit";
+    TipoTurno["Hiit"] = "Hiit";
     TipoTurno["Zumba"] = "Zumba";
     TipoTurno["Spinning"] = "Spinning";
     TipoTurno["Kickboxing"] = "Kickboxing";
