@@ -24,7 +24,7 @@ const Appointments = ({ id, date, time, type, status, onCancel }) => {
     const currentDate = new Date();
     const appointment = new Date(appointmentDate);
    
-    appointment.setDate(appointment.getDate() - 0);
+    appointment.setDate(appointment.getDate() - 1);
     
     return currentDate <= appointment;
   };
