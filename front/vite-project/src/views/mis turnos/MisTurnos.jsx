@@ -7,6 +7,7 @@ import styles from './MisTurnos.module.css'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setUserAppointments } from '../../redux/reducer';
+import AppointmentForm from '../../components/primary/AppointmentForm/AppointmentForm';
 
 const MisTurnos = () => {
     const dispatch = useDispatch();
@@ -24,12 +25,17 @@ const MisTurnos = () => {
         .then (res => dispatch (setUserAppointments(res.data.appointments)))
         .catch (error => console.error("Error al actualizar los turnos:", error))
     }
+    const handleRefresh = () => {
+        axios.get (`http://localhost:3000/users/${userId}`)
+        .then (res => dispatch (setUserAppointments(res.data.appointments)))
+        .catch (error => console.error("Error al actualizar los turnos:", error))
+    }
 
     return(
         <div className={styles.container}>
-            <h1>Este es el componente MisTurnos</h1>
+            <h1></h1>
+                <AppointmentForm onRefresh={handleRefresh}/>
             <div className={styles.cardcontainer}>
-                
                 {appointments.map(appointment => {
                     const fecha = appointment.date.split('T')[0]
                  return <Appointments key={appointment.id} id={appointment.id} date={fecha} time={appointment.time} type={appointment.type} status={appointment.status} onCancel={handleCancel} />

@@ -1,16 +1,29 @@
+.container {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
 .login-form {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
+    width: 400px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #333333;
     border-radius: 10px;
     font-weight: bold;
     background-color: #ffae00;
-    
+    align-items: center;
+    box-shadow: #333333;
   }
-  
+  .login-form div {
+    display: flex;
+    flex-direction: column;
+  }
   .login-form label {
     margin-bottom: 10px;
   }
@@ -20,6 +33,7 @@
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    
   }
   
   .login-form button {
@@ -40,3 +54,4 @@
 .login-form button[disabled] {
     opacity: 0.5;
   }
+

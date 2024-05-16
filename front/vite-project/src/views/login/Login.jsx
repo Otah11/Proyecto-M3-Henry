@@ -51,7 +51,9 @@ const Login = () => {
     }
 
     return (
+         <div className={styles.container}>
         <form className={styles['login-form']}  onSubmit={handleSubmit}>
+          
           <h2>Login</h2>
           <div>
             <label>Username</label>
@@ -65,6 +67,7 @@ const Login = () => {
           </div>
           <button disabled={loginData.username === '' ||  loginData.password === '' || Object.keys(errors).length !== 0} >Login</button>
         </form>
+        </div>
       );
 
 }

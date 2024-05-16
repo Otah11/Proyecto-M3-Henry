@@ -1,7 +1,8 @@
 .form {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
+    align-items: center;
+    width: 600px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #333333;
@@ -29,6 +30,8 @@
     border: 1px solid #333333; 
     font-size: 1em; 
     font-weight: bold;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .button:hover {
@@ -37,8 +40,3 @@
     border: 1px solid #333333;
 }
 
-.button[disabled] {
-    background-color: #ccc; 
-    color: #333333; 
-    border: 1px solid #ccc;
-}

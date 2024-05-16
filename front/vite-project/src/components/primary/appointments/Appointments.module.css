@@ -26,3 +26,30 @@
     margin-top: 0  ;
     margin-bottom: 0;
 }
+.button {
+    padding: 10px 20px;
+    color: #ffae00; 
+    background-color: #333333; 
+    border: 1px solid #333333; 
+    font-size: 1em; 
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #ffae00; 
+    color: #333333; 
+    border: 1px solid #333333;
+}
+.status {
+    font-weight: bold;
+  }
+  
+  .status.cancelled {
+    color: red;
+  }
+  
+
+  
+  .status.confirmed {
+    color: green;
+  }

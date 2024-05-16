@@ -6,7 +6,7 @@ import Login from './views/login/Login'
 import Register from './views/register/Register'
 import MisTurnos from './views/mis turnos/MisTurnos'
 import Gymhome from './views/gymhome/Gymhome'
-import AppointmentForm from './components/primary/AppointmentForm/AppointmentForm'
+import About from './views/about/About'
 function App() {
   
   return (
@@ -14,10 +14,10 @@ function App() {
   <NavBar />
   <Routes>
   <Route path="/" element={<Gymhome />} />
+  <Route path="/about" element={<About />} />
   <Route path="/login" element={<Login />} />
   <Route path="/register" element={<Register />} />
   <Route path="/turnos" element={<MisTurnos />} />
-  <Route path="/cita" element={<AppointmentForm />} />
   
   </Routes>
   </div>

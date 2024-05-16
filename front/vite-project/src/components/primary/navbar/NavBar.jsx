@@ -1,11 +1,22 @@
 import  styles from './NavBar.module.css'
 import {Link} from "react-router-dom"
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setUserAppointments, setUserData } from '../../../redux/reducer'
+import { useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
-
+    const dispatch = useDispatch()
+    const Navigate = useNavigate()
     const user = useSelector(state => state.userLogged.userData.login)
     console.log(user)
+
+    const handleLogOut = () => {
+        if(window.confirm("¿Estas seguro de cerrar sesion?")){
+            dispatch(setUserAppointments([]))
+            dispatch(setUserData({}))
+            Navigate('/')
+    }}
+
     return(
         <div className={styles.navbar}>
             
@@ -15,10 +26,10 @@ const NavBar = () => {
             </div>
             <div >
                 <Link to = "/"><span>Home</span></Link>
-                <span>About</span>
-                <span>Contact</span>
-                {user ? <Link to = "/turnos"><span>Turnos</span></Link> : null}
-                {user ? <Link to = "/cita"><span>Clases</span></Link> : null}
+                <Link to = "/about"><span>About</span></Link>
+                
+                {user ? <Link to = "/turnos"><span>Mi Cuenta</span></Link> : null}
+                {user ? <button onClick={handleLogOut} className={styles.buttons}>Log Out</button>: null}
 
             </div>
                 {!user ?               
