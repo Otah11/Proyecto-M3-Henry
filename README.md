@@ -55,3 +55,4 @@ El frontend está desarrollado con las siguientes tecnologías:
 
 - La arquitectura muestra una clara separación entre el frontend y el backend, permitiendo un desarrollo y despliegue independientes.
 
+![](https://github.com/Otah11/Proyecto-M3-Henry/blob/main/pm3-01.jpg)
