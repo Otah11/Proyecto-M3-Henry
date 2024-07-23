@@ -1,58 +1,66 @@
 # **Gym Studio**
 
+A website where you can register, log in, and book appointments for classes taught at a gym.
+
 Sitio web en el cual te puedes registrar, iniciar sesión y sacar turnos para las clases que se dictan en un gimnasio.
 
 ## Backend
 
+The backend is built using the following technologies:
+
 El backend está construido utilizando las siguientes tecnologías:
 
-### Tecnologías principales
+### Main technologies/Tecnologías principales
 - **Node.js**
 - **Express**
 - **TypeScript**
 
-### Base de datos
+### Data Base/Base de datos
 - **PostgreSQL**
 - **TypeORM**
 
-### Middleware y utilidades
+### Middleware and utilities/Middleware y utilidades
 - **cors**
 - **morgan**
 - **dotenv**
 
-### Herramientas de desarrollo
+### Development tools/Herramientas de desarrollo
 - **nodemon**
 - **ts-node**
 - **ESLint**
 
 ## Frontend
 
+The frontend is built using the following technologies:
+
 El frontend está desarrollado con las siguientes tecnologías:
 
-### Tecnologías principales
+### Main technologies/Tecnologías principales
 - **React**
 - **Vite**
 
-### Gestión del estado
+### State management/Gestión del estado
 - **Redux**
 - **@reduxjs/toolkit**
 - **react-redux**
 
-### Enrutamiento
+### Routing/Enrutamiento
 - **react-router-dom**
 
-### Formularios
+### Forms/Formularios
 - **formik**
 
-### Peticiones HTTP
+### HTTP requests/Peticiones HTTP
 - **axios**
 
-### Herramientas de desarrollo
+### Development tools/Herramientas de desarrollo
 - **ESLint**
 - **@vitejs/plugin-react**
 
-## Observaciones generales
+## General observations/Observaciones generales
 
+- The architecture shows a clear separation between the frontend and backend, allowing for independent development and deployment.
+  
 - La arquitectura muestra una clara separación entre el frontend y el backend, permitiendo un desarrollo y despliegue independientes.
 
 ![](https://github.com/Otah11/Proyecto-M3-Henry/blob/main/pm3-01.jpg)
